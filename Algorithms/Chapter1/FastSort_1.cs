@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Algorithms
+namespace Algorithms.Chapter1
 {
     class FastSort_1
     {
