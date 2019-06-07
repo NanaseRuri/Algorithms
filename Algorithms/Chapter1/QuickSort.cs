@@ -2,7 +2,7 @@
 
 namespace Algorithms.Chapter1
 {
-    class FastSort_1
+    class QuickSort
     {
         public static int SortUnit(int[] array, int left, int right)
         {

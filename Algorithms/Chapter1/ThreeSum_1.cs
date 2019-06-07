@@ -6,7 +6,7 @@
         {
             int count = 0;
 
-            FastSort_1.Sort(array,0,array.Length-1);
+            QuickSort.Sort(array,0,array.Length-1);
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = i+1; j < array.Length; j++)
