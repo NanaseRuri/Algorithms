@@ -11,10 +11,9 @@ namespace Algorithms.Chapter2_Sort
             int[] arr = sourceArray;
 
             int len = arr.Length;
-            string str = "fuck you";
 
             BuildMaxHeap(arr);
-
+                
             for (int i = len - 1; i > 0; i--)
             {
                 Swap(arr, 0, i);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+#pragma warning disable 0649
 
 namespace Algorithms.Chapter2_Sort
 {
@@ -12,6 +13,7 @@ namespace Algorithms.Chapter2_Sort
         public MaxPQ(int maxN)
         {
             Size = maxN;
+            pq=new Node<T>[Size];
         }
 
         public bool IsEmpty()

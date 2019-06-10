@@ -8,12 +8,12 @@ namespace Algorithms.Chapter2_Sort
     {
         private Node<T>[] pq;
 
-
         public int Size { get; private set; }
 
         public IndexMinPQ(int maxN)
         {
             Size = maxN;
+            pq=new Node<T>[Size];
         }
 
         public bool IsEmpty()
