@@ -1,4 +1,6 @@
-﻿namespace Algorithms.Chapter3_Search
+﻿#pragma warning disable 0649
+
+namespace Algorithms.Chapter3_Search
 {
     class SeparateChainingHashST<TKey,TValue>
     {

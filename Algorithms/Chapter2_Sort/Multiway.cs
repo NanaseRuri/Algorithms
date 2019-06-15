@@ -17,7 +17,7 @@ namespace Algorithms.Chapter2_Sort
 
             for (int i = 0; i < n; i++)
             {
-                pq.Insert(i,new Node<string>(array[i]));
+                pq.Insert(i,array[i]);
             }
 
             while (!pq.IsEmpty())
@@ -25,7 +25,7 @@ namespace Algorithms.Chapter2_Sort
                 int i = pq.DeleteMin();
                 if (!(array[i]==null))
                 {
-                    pq.Insert(i,new Node<string>(array[i]));
+                    pq.Insert(i,array[i]);
                 }
             }
 

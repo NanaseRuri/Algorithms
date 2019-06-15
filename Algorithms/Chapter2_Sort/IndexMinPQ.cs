@@ -1,78 +1,121 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Authentication;
 using System.Text;
+using Algorithms.Chapter4_Graph;
 
 namespace Algorithms.Chapter2_Sort
 {
-    class IndexMinPQ<T>
+    public class IndexMinPQ<T> where T : IComparable<T>
     {
-        private Node<T>[] pq;
+        public int Count { get; private set; }
+        private int[] pq;
+        private int[] qp;
+        private T[] keys;
 
-        public int Size { get; private set; }
-
-        public IndexMinPQ(int maxN)
+        public IndexMinPQ(int count)
         {
-            Size = maxN;
-            pq=new Node<T>[Size];
+            Count = count;
+            pq = new int[count + 1];
+            qp = new int[count + 1];
+            for (int i = 0; i < count + 1; i++)
+            {
+                qp[i] = -1;
+            }
         }
 
         public bool IsEmpty()
         {
-            return Size == 0;
-        }
-
-        public void Insert(int k,Node<T> value)
-        {
-            pq[++Size] = value;
-            Swim(Size);
-        }
-
-        public void Change(int k, Node<T> item)
-        {
-
+            return Count == 0;
         }
 
         public bool Contains(int k)
         {
-            return true;
+            return qp[k] != -1;
         }
 
-        public void Delete(int k)
+        public void Insert(int k, T key)
         {
-
+            Count++;
+            pq[k] = Count;
+            qp[Count] = k;
+            keys[k] = key;
+            Swim(k);
         }
 
-        public void Min()
+        public T Min()
         {
-
+            return keys[pq[1]];
         }
 
-        public int MinIndex()
+        public T DelMin()
         {
-            return 0;
+            int indexOfMin = pq[1];
+            Exchange(1, Count--);
+            Sink(1);
+            T temp = (T)keys[pq[Count + 1]];
+            keys[pq[Count + 1]] = default(T);
+            qp[pq[Count + 1]] = -1;
+            return temp;
         }
 
         public int DeleteMin()
         {
-            return 1;
+            int indexOfMin = pq[1];
+            Exchange(1, Count--);
+            Sink(1);
+            keys[pq[Count + 1]] = default(T);
+            qp[pq[Count + 1]] = -1;
+            return indexOfMin;
         }
 
-        
-
-        void Exchange(int a, int b)
+        private void Exchange(int i, int k)
         {
-            Node<T> temp = pq[a];
-            pq[a] = pq[b];
-            pq[b] = temp;
+            T temp = (T)keys[i];
+            int temp1 = pq[i];
+            int temp2 = qp[i];
+
+            keys[i] = keys[k];
+            keys[k] = temp;
+
+            pq[i] = pq[k];
+            pq[k] = temp1;
+
+            qp[i] = pq[k];
+            pq[k] = temp2;
         }
 
-        void Swim(int k)
+        void Sink(int index)
         {
-            while (k > 1 && k / 2 < k)
+            while (2*index<=Count)
             {
-                Exchange(k / 2, k);
-                k = k / 2;
+                int j = 2 * index;
+                if (j<Count&&keys[j].CompareTo(keys[j+1])<0)
+                {
+                    j++;
+                }
+
+                if (keys[j].CompareTo(keys[j+1])>=0)
+                {
+                    break;
+                }
+                Exchange(index,j);
+                index = j;
             }
+        }
+
+        void Swim(int index)
+        {
+            while (index>1&&keys[index/2].CompareTo(keys[index])<0)
+            {
+                Exchange(index / 2, index);
+                index = index / 2;
+            }
+        }
+
+        public void Change(int index, T value)
+        {
+            keys[index] = value;
         }
     }
 }

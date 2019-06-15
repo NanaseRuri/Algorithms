@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Algorithms.Chapter1;
 using Algorithms.Chapter2_Sort;
+using Algorithms.Chapter4_Graph;
 
 namespace Algorithms
 {
@@ -26,6 +28,32 @@ namespace Algorithms
             foreach (var i in array)
             {
                 Console.WriteLine(i);
+            }
+
+
+            //Graph 换成 DirectedGraph        ConnectedComponent 换成 KosarajuConnectedComponent 即有向无环图的连通分量
+            Graph g=new Graph();
+            ConnectedComponent cc = new ConnectedComponent(g);
+
+            int m = cc.Count;
+            ConcurrentBag<int>[] components = new ConcurrentBag<int>[m];
+            for (int i = 0; i < m; i++)
+            {
+                components[i]=new ConcurrentBag<int>();
+            }
+
+            for (int i = 0; i < g.VertexSize; i++)
+            {
+                components[cc.Id(i)].Add(i);
+            }
+
+            for (int i = 0; i < m; i++)
+            {
+                foreach (var i1 in components[i])
+                {
+                    Console.Write($"{i1} ");
+                }
+                Console.WriteLine();
             }
         }
     }

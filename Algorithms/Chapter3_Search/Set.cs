@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+#pragma warning disable 0169
 
 namespace Algorithms.Chapter3_Search
 {
