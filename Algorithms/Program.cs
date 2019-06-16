@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Algorithms.Chapter1;
 using Algorithms.Chapter2_Sort;
 using Algorithms.Chapter4_Graph;
+using Algorithms.Chapter5_String;
 
 namespace Algorithms
 {
@@ -55,6 +56,9 @@ namespace Algorithms
                 }
                 Console.WriteLine();
             }
+
+            KnuthMorrisPrattSearch search=new KnuthMorrisPrattSearch("aabaaaaa");
+            Console.WriteLine(search.Search("aabaabaaaaaa"));
         }
     }
 }
